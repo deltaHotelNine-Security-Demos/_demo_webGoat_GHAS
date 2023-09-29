@@ -66,15 +66,11 @@ jobs:
     - name: Set up JDK 17
       uses: actions/setup-java@v1
       with:
+        distribution: 'temurin'
         java-version: 17
-    - name: Cache Maven packages
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+        architecture: x64
     - name: Build
-      run: mvn --no-transfer-progress verify
+      run: mvn clean install
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
